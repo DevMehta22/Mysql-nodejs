@@ -9,7 +9,7 @@ router.get('/notes/:id',getNoteById);
 //POST /api/user -> create a new user
 router.post('/notes',createNote);
 //PUT /api/user:id -> update an existing user
-// router.put('/notes/:id',updateNote);
+router.put('/notes/:id',updateNote);
 //DELETE /api/user:id -> delete a user with the given id
 router.delete('/notes/:id',deleteNote);
 

@@ -39,26 +39,31 @@ const createNote = async(req,res)=>{
             }
 }
 
-// const updateNote = async(req,res)=>{
-//     const id=req.params.id;
-//     const {title,contents}=req.body;
-//     let query=`UPDATE notes SET`;
-//     let values=[];
-//     let i=0;
-//     for(const key in req.body){
-//         i++;
-//         if(i===1)
-//             query=(query +`title=? `,[key]);
-//         else
-//             query=((query+`, contents=?`),[key]);
-//         values.push(req.body[key]);
-//     };
-//     query=(query+" WHERE id=?",[id]);
-//     values.push(id);
-//     await Pool.query(query);
-//     //console.log(values);
-//     res.status(200).send('Updated');
-// };
+const updateNote = async (req, res) => {
+    const id = req.params.id;
+    const { title, contents } = req.body;
+    let query = `UPDATE notes SET`;
+    let values = [];
+    let i = 0;
+
+    for (const key in req.body) {
+        i++;
+        if (i === 1)
+            query = `${query} title=? `;
+        else
+            query = `${query}, contents=?`;
+        
+        values.push(req.body[key]);
+    }
+
+    query = `${query} WHERE id=?`;
+    values.push(id);
+
+    await Pool.query(query, values);
+
+    res.status(200).send('Updated');
+};
+
 
 //delete a specific note by its id
 const deleteNote =async (req,res)=>{
